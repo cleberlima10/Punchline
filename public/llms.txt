@@ -1,0 +1,90 @@
+# Punchline Barbearia
+
+> Barbearia clássica em Nova Santa Rita, Rio Grande do Sul, Brasil. Corte
+> masculino, barba na navalha e cuidados masculinos, com atendimento por hora
+> marcada. O fundador também ministra curso de barbeiro.
+
+A Punchline é uma barbearia clássica com atendimento agendado. O site é uma
+landing page única (as seções são âncoras da mesma URL) cujo objetivo é levar o
+visitante ao agendamento.
+
+Posicionamento declarado pela própria marca: "Somos uma barbearia clássica: bom
+corte, bom café e atendimento de cavalheiros."
+
+## Serviços
+
+Todos com hora marcada. Os valores não são divulgados no site — são informados
+no atendimento e na tela de agendamento.
+
+Cortes:
+- Corte — 45 min
+- Corte com Máquina (1 pente em todo o cabelo) — 30 min
+- Corte Social (somente 1 pente lateral) — 30 min
+- Corte Infantil — 30 min
+
+Barba:
+- Barba Tradicional — 45 min
+- Barba Expressa (somente com máquina) — 30 min
+
+Corte e Barba:
+- Corte e Barba Tradicional — 75 min
+- Corte e Barba Expressa — 60 min
+- Corte Social e Barba Tradicional — 60 min
+- Corte com Máquina e Barba Tradicional — 45 min
+
+Acabamento:
+- Acabamento / Pezinho — 15 min
+
+## Equipe
+
+- Felipe Cunha — fundador e barbeiro. Estudou com o barbeiro grego Vasilis
+  Serafetinidis em 2024 e trabalhou na maior rede de barbearia clássica do
+  Brasil.
+- Gabriel Torres — barbeiro.
+
+## Curso de barbeiro
+
+Felipe Cunha também ensina o ofício: corte clássico, navalha e a rotina da
+profissão. Informações e inscrição pelo WhatsApp. Formato, carga horária e
+valores não são divulgados no site.
+
+## Produtos
+
+Pomadas, tônicos e cuidados para cabelo e barba, vendidos na barbearia.
+
+- Nacionais: Caballeros Pomade, Knucklehead Pomade, Jelly Roll Grease, Scout
+  Pomade
+- Importadas: Reuzel, Uppercut Deluxe, Clubman Pinaud, Murray's, Dax Pomade
+
+## História
+
+A Punchline começou como ideia em setembro de 2021 e abriu em fevereiro de
+2025. O salão tem duas cadeiras de barbeiro restauradas, algumas peças datadas
+da década de 1950, em ferro fundido e couro legítimo.
+
+## Atendimento
+
+- Segunda-feira: 14:00 às 20:00
+- Terça a sexta-feira: 10:00 às 20:00
+- Sábado: 10:00 às 16:00
+- Domingo: fechado
+
+## Endereço
+
+Helio Fraga de Moraes Sarmento, 184 — Centro — Nova Santa Rita/RS — CEP
+92480-000
+
+## Links
+
+- [Agendamento online](https://sites.appbarber.com.br/punchline-vy4t): sistema
+  oficial de reserva de horário (AppBarber).
+- [WhatsApp](https://api.whatsapp.com/send/?phone=5551999702013): único canal
+  de contato direto — a barbearia não tem telefone fixo.
+- [Localização no Google Maps](https://maps.app.goo.gl/H9MTbDNvJY96k6Xi9)
+- [Instagram @punchlinebr](https://www.instagram.com/punchlinebr/)
+
+## Observações
+
+- Não há loja online: os produtos são vendidos presencialmente.
+- Não há atendimento por telefone fixo.
+- Os preços dos serviços e do curso não são publicados no site.

@@ -1,0 +1,40 @@
+# Dependências
+node_modules/
+
+# Saídas de build — a Vercel gera estas na nuvem, não devem subir
+.next/
+out/
+*.tsbuildinfo
+
+# Variáveis de ambiente
+.env
+.env.local
+.env*.local
+!.env.local.example
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Vercel
+.vercel
+
+# Acervo original de fotos do cliente (250 MB).
+#
+# São os arquivos brutos, direto da câmera e do celular. O site não usa nenhum
+# deles: o que vai ao ar são as versões tratadas em `public/images`.
+#
+# Ficam fora do repositório de propósito — subir 250 MB a cada deploy só para
+# guardar original é desperdício. Guarde esta pasta em backup próprio (drive,
+# HD externo); ela é o material de origem e não pode se perder.
+fotosdabarbearia/
+
+# Referências de movimento e direção de arte (26 MB de capturas e PDF).
+#
+# Material de consulta do projeto, não entra na construção do site. Mesma
+# lógica da pasta acima: guarde em backup próprio.
+referencia1/
