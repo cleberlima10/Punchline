@@ -159,3 +159,32 @@ body {
   line-height: 1.4;
 }
 
+/* ==========================================================================
+   Entrada do hero, em CSS puro
+
+   O conteúdo da primeira dobra NÃO usa animação em JavaScript, e isso é
+   deliberado. Com Framer Motion, o HTML sai do servidor com `opacity: 0` e o
+   texto só aparece depois que o bundle carrega e hidrata — o PageSpeed media
+   2,6s de atraso de renderização na LCP por causa disso.
+
+   Em CSS, o navegador pinta e anima sem esperar JavaScript nenhum. O
+   `backwards` mantém o estado inicial durante o atraso, para nada piscar antes
+   de começar.
+
+   Quem pede movimento reduzido já é atendido pela regra global lá em cima, que
+   zera a duração de qualquer animação.
+   ========================================================================== */
+@keyframes entrada-hero {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility entrada-hero {
+  animation: entrada-hero 0.9s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}

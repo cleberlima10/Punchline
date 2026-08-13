@@ -527,6 +527,62 @@ outra, um sozinho — e o bloco parecia jogado, principalmente no Android.
 Virou grade de duas colunas no celular (`flex-wrap` só a partir de `sm`).
 Agora são 4 linhas alinhadas, com as colunas na mesma largura.
 
+### 2026-08-12 — Desempenho: recomendações do PageSpeed
+
+Quatro das cinco recomendações foram atendidas. A quinta foi recusada com
+motivo.
+
+**1. Atraso de 2,64s na renderização da LCP — a mais grave, resolvida.**
+
+O elemento de LCP era o parágrafo do manifesto no hero, animado com Framer
+Motion. O HTML saía do servidor com `opacity: 0` e o texto só aparecia depois
+que o bundle carregava e hidratava.
+
+A entrada do hero passou a ser **CSS puro** (`@keyframes entrada-hero`, com
+`animation-delay` por elemento). O navegador pinta e anima sem esperar
+JavaScript nenhum. Confirmado no HTML publicado: a tag sai
+`<p class="entrada-hero" style="animation-delay:0.22s">`, sem `opacity: 0`.
+
+**Regra que fica:** conteúdo da primeira dobra não se anima em JavaScript. O
+que estiver acima da dobra tem que nascer visível no HTML.
+
+**2. Entrega de imagens — 238 KB economizados**, mais que os 99 KB estimados
+pelo PageSpeed.
+
+| Imagem | Antes | Depois | Motivo |
+| --- | --- | --- | --- |
+| cadeira-01 | 1600px, 90 KB | 1280px, 55 KB | Exibida em 634px |
+| ambiente-02 | 1800px, 109 KB | 1100px, 34 KB | Fundo desfocado e escurecido |
+| ambiente-04 | 1800px, 109 KB | 1100px, 36 KB | Idem |
+| ferramentas-01 | 1600px, 40 KB | 1280px, 24 KB | Mesmo espaço da cadeira-01 |
+| cadeira-03 | 1600px, 98 KB | 1280px, 59 KB | Mesmo espaço da cadeira-01 |
+
+Os fundos passam por blur, brilho 0.34 e um véu de 85% por cima — ninguém
+enxerga detalhe ali, então aceitam compressão agressiva.
+
+**3. Preconnect** para `googletagmanager.com`, único domínio externo da página.
+As fontes não precisam: o `next/font` as serve do próprio domínio.
+
+**4. JavaScript legado (12 KiB) — RECUSADO, com dado.**
+
+A sugestão é mirar navegadores modernos no browserslist e parar de gerar
+polyfills (`Object.hasOwn`, `Array.prototype.at` e outros). Medido com a base
+do caniuse: **1,41% do tráfego brasileiro** está em navegador anterior a esse
+alvo — boa parte em UC Browser, comum em Android de entrada.
+
+Sem os polyfills, esses 1,41% não veem o site degradado: veem **página em
+branco**, porque o JavaScript lança erro. Trocar 12 KiB por 1 em cada 70
+visitantes perdidos é péssimo negócio para um site cujo objetivo é agendamento.
+
+*Se um dia o Analytics mostrar que esse público não existe de fato, a mudança é
+uma linha no `package.json`.*
+
+**5. CSS que bloqueia renderização (9,3 KiB, 180 ms) — não perseguido.**
+
+É a folha do Tailwind, já pequena e já minificada. Extrair CSS crítico exigiria
+ferramenta extra no build para ganhar poucos milissegundos. O custo de
+manutenção não compensa.
+
 ### 2026-08-12 — Domínio definitivo: punchlines.com.br
 
 Confirmado pelo cliente. Trocado em `lib/content.ts`, que é a **única fonte**
@@ -597,6 +653,15 @@ erro, mas é uma inconsistência consciente — se um dia a paleta for revista,
 este é o ponto de partida da conversa.
 
 O logo continua **sem versão em vetor** (P11): tudo aqui parte de um PNG.
+
+### 2026-08-12 — "Premium" sai do título
+
+O título da aba e do Google dizia "Barbearia Premium em Nova Santa Rita". O
+cliente pediu **Clássica**, que é como a marca se descreve no próprio texto do
+site. Ajustado no `<title>`, na meta description e na descrição do Schema.
+
+A keyword "Barbearia Premium RS" continua na lista de keywords — está em
+`specs/design.md` e não aparece para o visitante.
 
 ### 2026-08-12 — Clientes atendidos: 580+ vira 10 mil+
 

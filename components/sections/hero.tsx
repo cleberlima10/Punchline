@@ -8,8 +8,6 @@ import { useMediaQuery } from "@/lib/use-media-query";
 import { Botao } from "@/components/ui";
 import { Reveal } from "@/components/motion-primitives";
 
-const EASE = [0.16, 1, 0.3, 1] as const;
-
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
@@ -80,60 +78,46 @@ export function Hero() {
 
         <div className="flex flex-col gap-8 sm:gap-10 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.15, ease: EASE }}
-              className="flex items-center gap-3"
+            <div
+              className="entrada-hero flex items-center gap-3"
+              style={{ animationDelay: "0.1s" }}
             >
               <span className="h-px w-10 bg-gold" aria-hidden />
               <span className="eyebrow">{hero.eyebrow}</span>
-            </motion.div>
+            </div>
 
-            {/* Manifesto em parágrafos. Corpo menor que uma subheadline comum
-                porque são ~120 palavras: no tamanho anterior não caberia na
-                primeira dobra de um celular. */}
+            {/* Manifesto em parágrafos, com entrada em CSS.
+                Este bloco é o elemento de LCP da página — animá-lo em
+                JavaScript custava 2,6s de atraso de renderização, porque o
+                texto saía do servidor invisível e esperava a hidratação. */}
             <div className="mt-5 space-y-3 text-sm leading-relaxed text-bone/85 sm:mt-6 sm:space-y-3.5 sm:text-base">
               {naDobra.map((paragrafo, i) => (
-                <motion.p
+                <p
                   key={i}
-                  initial={
-                    reduced
-                      ? { opacity: 0 }
-                      : { opacity: 0, y: 18, filter: "blur(6px)" }
-                  }
-                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  transition={{
-                    duration: 1,
-                    delay: 0.3 + i * 0.09,
-                    ease: EASE,
-                  }}
+                  className="entrada-hero"
+                  style={{ animationDelay: `${0.22 + i * 0.09}s` }}
                 >
                   {paragrafo}
-                </motion.p>
+                </p>
               ))}
 
               {/* A punchline da Punchline. Dourada, porque é o remate.
                   No celular ela desce junto com os parágrafos que saíram da
                   dobra — a piada precisa vir depois da preparação. */}
               {!dobraCurta && (
-                <motion.p
-                  initial={reduced ? { opacity: 0 } : { opacity: 0, y: 18 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 0.7, ease: EASE }}
-                  className="!mt-5 font-medium text-gold sm:!mt-6"
+                <p
+                  className="entrada-hero !mt-5 font-medium text-gold sm:!mt-6"
+                  style={{ animationDelay: "0.55s" }}
                 >
                   {hero.remate}
-                </motion.p>
+                </p>
               )}
             </div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.85, ease: EASE }}
-            className="flex flex-wrap items-center gap-3"
+          <div
+            className="entrada-hero flex flex-wrap items-center gap-3"
+            style={{ animationDelay: "0.65s" }}
           >
             <Botao
               href={negocio.linkAgendamento}
@@ -144,18 +128,16 @@ export function Hero() {
             <Botao href="#experiencia" variante="secundario">
               {hero.ctaSecundario}
             </Botao>
-          </motion.div>
+          </div>
         </div>
       </motion.div>
 
       {/* Camada 4 — indicador de scroll. Em todas as telas: no celular é onde
           ele mais serve, porque a dobra é quase toda fotografia e nada indica
           que a página continua. Um pouco menor no mobile. */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.4 }}
-        className="pointer-events-none absolute bottom-5 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2.5 sm:bottom-7 sm:gap-3"
+      <div
+        className="entrada-hero pointer-events-none absolute bottom-5 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2.5 sm:bottom-7 sm:gap-3"
+        style={{ animationDelay: "1s" }}
       >
         <span className="text-[0.55rem] font-medium uppercase tracking-[0.3em] text-ash sm:text-[0.6rem]">
           Role
@@ -172,7 +154,7 @@ export function Hero() {
             }}
           />
         </span>
-      </motion.div>
+      </div>
       </section>
 
       {/* Continuação do manifesto no celular. O que saiu da primeira dobra

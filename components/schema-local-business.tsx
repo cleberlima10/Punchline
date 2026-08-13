@@ -44,7 +44,7 @@ export function SchemaLocalBusiness() {
     // Com barra no fim, igual à canonical: o projeto usa `trailingSlash: true`,
     // e declarar as duas formas faria o Google ver dois endereços.
     description:
-      "Barbearia clássica premium em Nova Santa Rita, RS. Corte masculino, barba na navalha e atendimento personalizado.",
+      "Barbearia clássica em Nova Santa Rita, RS. Corte masculino, barba na navalha e atendimento personalizado.",
     url: `${negocio.dominio}/`,
     image: `${negocio.dominio}/images/og.jpg`,
     priceRange: "$$",

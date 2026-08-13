@@ -18,9 +18,9 @@ const inter = Inter({
 });
 
 const descricao =
-  "Barbearia clássica premium em Nova Santa Rita, RS. Corte masculino, barba na navalha e atendimento que trata cada visita como se fosse a primeira.";
+  "Barbearia clássica em Nova Santa Rita, RS. Corte masculino, barba na navalha e atendimento que trata cada visita como se fosse a primeira.";
 
-const titulo = "Punchline Barbearia — Barbearia Premium em Nova Santa Rita, RS";
+const titulo = "Punchline Barbearia — Barbearia Clássica em Nova Santa Rita, RS";
 
 /**
  * Imagem de compartilhamento. Recorte 1200x630 do hero, que é a proporção que
@@ -103,6 +103,18 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="pt-BR" className={`${bebas.variable} ${inter.variable}`}>
+      <head>
+        {/*
+          Único domínio externo da página. Abrir a conexão desde já poupa a
+          negociação de DNS e TLS quando o Analytics for buscado.
+          As fontes não entram aqui: o next/font as serve do próprio domínio.
+        */}
+        <link
+          rel="preconnect"
+          href="https://www.googletagmanager.com"
+          crossOrigin=""
+        />
+      </head>
       <body>{children}</body>
       <Analytics />
     </html>
