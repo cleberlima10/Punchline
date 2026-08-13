@@ -76,31 +76,53 @@ export function MaskTitle({
 }) {
   const reduced = useReducedMotion();
 
+  /*
+   * Um observador só, no título inteiro, com as linhas escalonadas por
+   * `staggerChildren`.
+   *
+   * A versão anterior colocava `whileInView` em cada linha — um
+   * IntersectionObserver por linha. No celular isso falhava de forma
+   * consistente: a última linha não disparava e ficava presa embaixo da
+   * máscara, invisível. Títulos apareciam pela metade ("NOSSOS" sem
+   * "serviços", "FEITO" sem "na cadeira").
+   *
+   * Com um observador só, ou o título inteiro anima, ou nenhuma linha anima.
+   * Não existe mais o estado quebrado de "metade apareceu".
+   */
   return (
-    <Tag className={className}>
-      {lines.map((line, i) => (
-        // O padding-top compensado por margem negativa abre espaço para os
-        // acentos do português (Ã, É, Ç) — sem ele a máscara os decapita.
-        <span
-          key={line + i}
-          className="-mt-[0.18em] block overflow-hidden pb-[0.08em] pt-[0.18em]"
-        >
-          <motion.span
-            className="block"
-            initial={reduced ? { opacity: 0 } : { y: "108%" }}
-            whileInView={{ y: "0%", opacity: 1 }}
-            viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
-            transition={{
-              duration: 1.05,
-              delay: delay + i * 0.09,
-              ease: EASE,
-            }}
+    <motion.div
+      initial="oculto"
+      whileInView="visivel"
+      viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
+      variants={{
+        visivel: { transition: { delayChildren: delay, staggerChildren: 0.09 } },
+      }}
+    >
+      <Tag className={className}>
+        {lines.map((line, i) => (
+          // O padding-top compensado por margem negativa abre espaço para os
+          // acentos do português (Ã, É, Ç) — sem ele a máscara os decapita.
+          <span
+            key={line + i}
+            className="-mt-[0.18em] block overflow-hidden pb-[0.08em] pt-[0.18em]"
           >
-            {line}
-          </motion.span>
-        </span>
-      ))}
-    </Tag>
+            <motion.span
+              className="block"
+              variants={{
+                oculto: reduced ? { opacity: 0 } : { y: "108%" },
+                visivel: {
+                  y: "0%",
+                  opacity: 1,
+                  transition: { duration: 1.05, ease: EASE },
+                },
+              }}
+            >
+              {line}
+            </motion.span>
+          </span>
+        ))}
+      </Tag>
+    </motion.div>
   );
 }
 

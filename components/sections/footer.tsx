@@ -27,7 +27,16 @@ export function Footer() {
             </p>
           </div>
 
-          <nav className="flex flex-wrap gap-x-8 gap-y-3" aria-label="Rodapé">
+          {/*
+            No celular vira uma grade de duas colunas.
+            Como `flex-wrap`, os oito links quebravam onde calhasse — três numa
+            linha, dois na outra, um sozinho — e o bloco parecia jogado. Em
+            grade cada item ocupa uma célula e as colunas se alinham.
+          */}
+          <nav
+            className="grid grid-cols-2 gap-x-6 gap-y-3.5 sm:flex sm:flex-wrap sm:gap-x-8 sm:gap-y-3"
+            aria-label="Rodapé"
+          >
             {[
               { rotulo: "Experiência", href: "#experiencia" },
               { rotulo: "Serviços", href: "#servicos" },

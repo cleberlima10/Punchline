@@ -490,6 +490,43 @@ vincular marca a foto. Grafia corrigida para o nome oficial: "Knucklehead" e
 **Texto dos Barbeiros** trocado pelo do cliente, sobre a relação de confiança
 entre cliente e barbeiro.
 
+### 2026-08-12 — Títulos aparecendo pela metade no celular
+
+Relatado pelo cliente com prints: em Serviços, Galeria, Produtos e Reputação, a
+**última linha do título não aparecia** — "NOSSOS" sem "serviços", "FEITO" sem
+"na cadeira", "QUEM CONHECE" sem "reconhece". Ocorria também em Samsung.
+
+**Causa.** O `MaskTitle` colocava `whileInView` em *cada linha* — um
+IntersectionObserver por linha, cada uma com seu próprio `delay`. As linhas com
+atraso (`i * 0.09`) ficavam vulneráveis: qualquer re-renderização logo após a
+montagem — e existem várias, por causa do `useMediaQuery` com
+`useSyncExternalStore` — pegava a animação ainda no período de espera e a
+descartava. A linha 0, sem atraso, já tinha começado e sobrevivia. Daí o padrão
+sempre igual: a primeira aparece, as seguintes não.
+
+O estado quebrado é grave porque `initial={{ y: "108%" }}` não mexe em
+opacidade: a linha fica **posicionada fora da máscara**, ou seja, o texto
+simplesmente some.
+
+**Correção.** Um observador só, no título inteiro, com as linhas escalonadas
+por `staggerChildren` em variants. A orquestração passa a ser do pai, que tem
+estado estável entre re-renderizações. Não existe mais o estado "metade
+apareceu": ou o título inteiro anima, ou nenhuma linha anima.
+
+Conferido que o `div` extra em volta do `<Tag>` não mexeu no layout: os oito
+títulos mantêm `margin-top: 28px` e largura cheia.
+
+**Regra:** título dividido em linhas animadas usa **um** gatilho no bloco, com
+stagger. Um gatilho por linha multiplica os pontos de falha.
+
+### 2026-08-12 — Rodapé reorganizado no celular
+
+Oito links em `flex-wrap` quebravam onde calhasse — três numa linha, dois na
+outra, um sozinho — e o bloco parecia jogado, principalmente no Android.
+
+Virou grade de duas colunas no celular (`flex-wrap` só a partir de `sm`).
+Agora são 4 linhas alinhadas, com as colunas na mesma largura.
+
 ### 2026-08-12 — Domínio definitivo: punchlines.com.br
 
 Confirmado pelo cliente. Trocado em `lib/content.ts`, que é a **única fonte**
