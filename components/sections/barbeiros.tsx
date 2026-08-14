@@ -98,7 +98,10 @@ export function Barbeiros() {
   return (
     <section id="barbeiros" className="relative bg-surface">
       <Secao className={umPorVez ? "!pb-0" : ""}>
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end lg:gap-20">
+        {/* Alinhado pelo topo. Com `items-end` as duas colunas casavam pela
+            base, e como o parágrafo da direita tem sete linhas, o título era
+            empurrado para o fim da seção. */}
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-20">
           <div>
             <Etiqueta>Quem atende</Etiqueta>
             <MaskTitle

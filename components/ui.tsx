@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import { irParaSecao } from "@/lib/ir-para-secao";
+import { registrarEvento } from "@/lib/eventos";
 
 /* ==========================================================================
    Preencher — marcador visível de conteúdo pendente.
@@ -25,6 +26,12 @@ type BotaoProps = {
   variante?: "primario" | "secundario" | "fantasma";
   className?: string;
   pendencia?: string;
+  /**
+   * De qual bloco da página este botão veio. Vai junto no evento do Analytics:
+   * o site tem vários CTAs de agendamento, e saber qual deles converte mais é
+   * o que permite melhorar a página depois.
+   */
+  origem?: string;
 };
 
 /** Tudo que sai do domínio abre em nova guia. Âncoras internas, não. */
@@ -48,6 +55,7 @@ export function Botao({
   variante = "primario",
   className = "",
   pendencia,
+  origem = "sem-origem",
 }: BotaoProps) {
   const conteudo = (
     <>
@@ -89,6 +97,7 @@ export function Botao({
         href={href}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => registrarEvento(href, origem)}
         className={classes}
       >
         {conteudo}
