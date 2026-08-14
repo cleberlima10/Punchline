@@ -102,7 +102,7 @@ export function Barbeiros() {
           <div>
             <Etiqueta>Quem atende</Etiqueta>
             <MaskTitle
-              lines={["Duas mãos", "que sabem", "o que fazem."]}
+              lines={["Nossos", "Barbeiros"]}
               className="display mt-7 text-[clamp(2.6rem,7vw,5rem)] text-bone"
             />
           </div>

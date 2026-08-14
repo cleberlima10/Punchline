@@ -1329,6 +1329,12 @@ direcional lateral, fundo escuro, sem clutter no enquadramento.
 adesivado, a garrafa de Jägermeister, embalagens e itens pessoais do campo de
 visão.
 
+### 2026-08-14 — Título da seção Barbeiros trocado
+
+O título dizia "Duas mãos que sabem o que fazem." Pedido do cliente: trocar
+para "Nossos Barbeiros". `MaskTitle` aceita `lines: string[]` de tamanho
+livre, então a troca de 3 para 2 linhas não exige mudança no componente.
+
 ### Backlog
 
 *(demais ideias e melhorias planejadas mas ainda não executadas)*
